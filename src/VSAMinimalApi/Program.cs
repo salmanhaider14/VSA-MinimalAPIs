@@ -2,7 +2,6 @@
 using FluentValidation;
 using VSAMinimalApi.Database;
 using VSAMinimalApi.Features.Books;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using VSAMinimalApi.Features.ExceptionHandling;
