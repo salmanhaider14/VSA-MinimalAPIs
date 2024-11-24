@@ -1,0 +1,13 @@
+System.MissingMethodException: Attempted to invoke a deleted lambda or local function implementation. This can happen when lambda or local function is deleted while the application is running.
+   at LearningMA.ProductEndpoints.<>c.<Map>b__1_0()
+   at lambda_method1(Closure, Object, HttpContext)
+   at Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+
+HEADERS
+=======
+Accept: application/json
+Host: localhost:5073
+User-Agent: IntelliJ HTTP Client/JetBrains Rider 2024.1.3
+Accept-Encoding: br, deflate, gzip, x-gzip
+Content-Length: 0
