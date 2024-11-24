@@ -43,4 +43,7 @@ public static class UpdateBook
         return TypedResults.Ok(bookToUpdate);
 
     }
+    internal static void MapUpdateBook(this IEndpointRouteBuilder app) =>
+        app.MapPut("/{bookId}", Handler)
+            .Produces(statusCode:204);
 }

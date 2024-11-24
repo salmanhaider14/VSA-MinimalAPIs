@@ -1,5 +1,8 @@
+
 namespace VSAMinimalApi.Features.Book;
+
 using VSAMinimalApi.Database;
+using VSAMinimalApi.Database.Models;
 public static class GetBooks
 {
     public static IResult Handler(MyContext context, int pageNumber = 1, int pageSize = 10)
@@ -10,4 +13,7 @@ public static class GetBooks
             .ToList();
         return TypedResults.Ok(books);
     }
+    internal static void MapGetBooks(this IEndpointRouteBuilder app) =>
+        app.MapGet("/", Handler)
+            .Produces<List<Book>>();
 }

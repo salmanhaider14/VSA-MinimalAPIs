@@ -21,4 +21,7 @@ public static class GetBook
         
         return TypedResults.Ok(bookRes);
     }
+    internal static void MapGetBook(this IEndpointRouteBuilder app) =>
+        app.MapGet("/{bookId}", Handler)
+            .Produces<GetBookResponse>();
 }

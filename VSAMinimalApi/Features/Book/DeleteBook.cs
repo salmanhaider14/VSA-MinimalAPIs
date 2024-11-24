@@ -20,4 +20,7 @@ public static class DeleteBook{
         return TypedResults.NoContent();
 
     }
+    internal static void MapDeleteBook(this IEndpointRouteBuilder app) =>
+        app.MapDelete("/{bookId}", Handler)
+            .Produces(statusCode:204);
 }

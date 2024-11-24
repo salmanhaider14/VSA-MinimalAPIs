@@ -6,7 +6,7 @@ using VSAMinimalApi.Database.Models;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
-public class CreateBook
+public static class CreateBook
 {
     public record CreateBookCommand(string Title, DateOnly PublishedDate, string AuthorName);
 
@@ -44,4 +44,7 @@ public class CreateBook
         return TypedResults.Created($"/books/{newBook.Id}", newBook);
         
     }
+    internal static void MapCreateBook(this IEndpointRouteBuilder app) =>
+        app.MapPost("/", Handler)
+            .Produces<Book>(statusCode:201);
 }
