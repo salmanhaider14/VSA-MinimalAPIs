@@ -1,0 +1,30 @@
+@LearningMA_HostAddress = http://localhost:5073
+
+GET {{LearningMA_HostAddress}}/books/
+Accept: application/json
+
+###
+
+POST {{LearningMA_HostAddress}}/books/
+Content-Type: application/json
+
+{
+"title" : "rust for dummies",
+  "publishedDate" : "2024-12-30",
+  "authorName" : "Salman"
+}
+###
+GET {{LearningMA_HostAddress}}/books/1
+
+###
+PUT {{LearningMA_HostAddress}}/books/1
+Content-Type: application/json
+
+{
+  "title" : "C# for dummies",
+  "publishedDate" : "2024-12-30",
+  "authorName" : "Salman"
+}
+
+
+
