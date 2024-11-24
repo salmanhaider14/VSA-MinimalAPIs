@@ -2,12 +2,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using VSAMinimalApi.Database;
 
-namespace VSAMinimalApi.Features.Books;
-
-using VSAMinimalApi.Database;
-
-public static class DeleteBook{
-    
+namespace VSAMinimalApi.Features.Books.DeleteBook;
+public static class DeleteBookHandler
+{
     public static IResult Handler(int bookId,MyContext context, [FromServices] IMemoryCache cache)
     {
         var bookToDel = context.Books.FirstOrDefault(b => b.Id == bookId);
@@ -20,7 +17,4 @@ public static class DeleteBook{
         return TypedResults.NoContent();
 
     }
-    internal static void MapDeleteBook(this IEndpointRouteBuilder app) =>
-        app.MapDelete("/{bookId}", Handler)
-            .Produces(statusCode:204);
 }

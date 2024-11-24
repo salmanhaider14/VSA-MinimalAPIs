@@ -7,7 +7,8 @@ This project demonstrates a **Minimal API** implementation following the **Verti
 ## Features
 
 1. **Minimal API with Vertical Slice Architecture (VSA)**  
-   Each feature (e.g., `Book`) is organized into its own slice containing:
+   Each feature (e.g., `Books`) is organized into its own slice containing:
+   - Endpoints
    - Commands/Queries
    - Handlers
    - Validation logic
@@ -44,20 +45,39 @@ This project demonstrates a **Minimal API** implementation following the **Verti
 VSAMinimalApi/
 │
 ├── Features/
-│   ├── Book/
-│   │   ├── CreateBook.cs      # Create operation with validation
-│   │   ├── GetBook.cs         # Read single book with caching
-│   │   ├── GetBooks.cs     # Read multiple books with pagination
-│   │   ├── UpdateBook.cs      # Update operation
-│   │   ├── DeleteBook.cs      # Delete operation
-│   │   ├── BookEndpoints.cs   # Endpoint mappings
-│   └── ...
+│   ├── Books/
+│   │   ├── CreateBook/
+│   │   │   ├── CreateBookCommand.cs
+│   │   │   ├── CreateBookHandler.cs
+│   │   │   ├── CreateBookValidator.cs
+│   │   │   └── CreateBookEndpoint.cs
+│   │   ├── DeleteBook/
+│   │   │   ├── DeleteBookHandler.cs
+│   │   │   └── DeleteBookEndpoint.cs
+│   │   ├── GetBook/
+│   │   │   ├── GetBookEndpoint.cs
+│   │   │   ├── GetBookHandler.cs
+│   │   │   └── GetBookResponse.cs
+│   │   ├── GetBooks/
+│   │   │   ├── GetBooksEndpoint.cs
+│   │   │   └── GetBooksHandler.cs
+│   │   ├── UpdateBook/
+│   │   │   ├── UpdateBookCommand.cs
+│   │   │   ├── UpdateBookHandler.cs
+│   │   │   ├── UpdateBookEndpoint.cs
+│   │   │   └── UpdateBookValidator.cs
+│   │   ├── BookEndpoints.cs
+│   │
+│   └── ExceptionHandling/
+│       └── ExceptionHandlingMiddleware.cs
 │
 ├── Database/
 │   ├── Models/                # EF Core models
 │   └── MyContext.cs           # EF Core DbContext
 │
-├── Program.cs                 # Application entry point
+├
+├──Program.cs # Application entry point
+│          
 └── appsettings.json           # Configuration file
 ```
 
@@ -92,12 +112,14 @@ VSAMinimalApi/
    ```bash
    dotnet restore
    ```
+
 3. Run the application:
    ```bash
-   dotnet run
+   dotnet run --project src
    ```
 
 ---
+
 ## Database
 
 This project is currently configured to use an **In-Memory Database** for simplicity and demonstration purposes. This allows you to quickly test the application without setting up a database server.
@@ -126,8 +148,6 @@ You can configure the application to use a persistent database like **SQL Server
    dotnet ef database update
    ```
 
-This allows you to switch to a production-ready database when needed.
-
 ---
 
 ## Validation
@@ -143,27 +163,35 @@ Validation errors return a structured `400 Bad Request` response.
 
 ## Caching
 
-- **IMemoryCache** is used for caching single book retrievals (`/books/{id}`).  
-- Cache entries expire after **5 minutes**.  
+- **IMemoryCache** is used for caching single book retrievals (`/books/{id}`).
+- Cache entries expire after **5 minutes**.
 - Cache is invalidated after book updates or deletions.
 
 ---
 
 ## Global Exception Handling
 
-- Unhandled exceptions are logged using the `ILogger` interface.
-- Users receive a generic `500 Internal Server Error` response with a meaningful message.
+The **ExceptionHandlingMiddleware** provides centralized error handling for unexpected exceptions. This middleware ensures:
+1. All unhandled exceptions are logged using `ILogger`.
+2. Clients receive a structured `500 Internal Server Error` response with a meaningful error message.
+
+To add this middleware, the `Program.cs` file includes:
+```csharp
+app.UseExceptionHandling();
+```
 
 ---
 
 ## Pagination
 
 - The `GET /books` endpoint supports pagination:
-  - Query parameters: `pageNumber` (default: 1), `pageSize` (default: 10).
-  - Example: `/books?pageNumber=2&pageSize=5`.
+   - Query parameters: `pageNumber` (default: 1), `pageSize` (default: 10).
+   - Example: `/books?pageNumber=2&pageSize=5`.
 
 ---
 
 ## Contributing
 
-All types of contributions are welcome .
+All types of contributions are welcome! If you have suggestions, feel free to open a pull request or issue.
+
+---

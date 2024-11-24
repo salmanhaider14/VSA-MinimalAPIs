@@ -1,12 +1,11 @@
-
-namespace VSAMinimalApi.Features.Books;
+namespace VSAMinimalApi.Features.Books.GetBook;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using VSAMinimalApi.Database;
-public static class GetBook
+
+public static class GetBookHandler
 {
-    public record GetBookResponse(int Id, string Title, DateOnly PublishedDate, string AuthorName);
     public static  IResult Handler(MyContext context,[FromServices] IMemoryCache cache, int bookId)
     {
         var cacheKey = $"Book_{bookId}";
@@ -21,7 +20,4 @@ public static class GetBook
         
         return TypedResults.Ok(bookRes);
     }
-    internal static void MapGetBook(this IEndpointRouteBuilder app) =>
-        app.MapGet("/{bookId}", Handler)
-            .Produces<GetBookResponse>();
 }

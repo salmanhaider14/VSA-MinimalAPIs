@@ -1,3 +1,9 @@
+using VSAMinimalApi.Features.Books.CreateBook;
+using VSAMinimalApi.Features.Books.DeleteBook;
+using VSAMinimalApi.Features.Books.GetBook;
+using VSAMinimalApi.Features.Books.GetBooks;
+using VSAMinimalApi.Features.Books.UpdateBook;
+
 namespace VSAMinimalApi.Features.Books;
 public static class BookEndpoints
 { 
