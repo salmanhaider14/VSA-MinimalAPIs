@@ -1,4 +1,4 @@
-namespace VSAMinimalApi.Features.Book;
+namespace VSAMinimalApi.Features.Books;
 public static class BookEndpoints
 { 
     public static void MapBookEndpoints(this WebApplication app)

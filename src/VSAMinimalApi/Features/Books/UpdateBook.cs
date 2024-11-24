@@ -1,4 +1,4 @@
-namespace VSAMinimalApi.Features.Book;
+namespace VSAMinimalApi.Features.Books;
 
 using VSAMinimalApi.Database;
 using FluentValidation;

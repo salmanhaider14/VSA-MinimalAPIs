@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using VSAMinimalApi.Database;
 
-namespace VSAMinimalApi.Features.Book;
+namespace VSAMinimalApi.Features.Books;
 
 using VSAMinimalApi.Database;
 

@@ -1,5 +1,5 @@
 
-namespace VSAMinimalApi.Features.Book;
+namespace VSAMinimalApi.Features.Books;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
