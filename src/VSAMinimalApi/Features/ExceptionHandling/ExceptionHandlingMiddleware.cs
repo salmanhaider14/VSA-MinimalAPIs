@@ -2,8 +2,15 @@ using Microsoft.AspNetCore.Diagnostics;
 
 namespace VSAMinimalApi.Features.ExceptionHandling;
 
+/// <summary>
+///     Provides extension methods for configuring exception handling middleware.
+/// </summary>
 public static class ExceptionHandlingMiddleware
 {
+    /// <summary>
+    ///     Configures the application to use centralised exception handling.
+    /// </summary>
+    /// <param name="app">The <see cref="WebApplication"/> instance to configure.</param>
     public static void UseExceptionHandling(this WebApplication app)
     {
         app.UseExceptionHandler(appError =>

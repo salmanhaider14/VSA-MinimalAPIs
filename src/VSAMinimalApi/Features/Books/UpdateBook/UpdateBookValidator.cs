@@ -2,6 +2,9 @@ using FluentValidation;
 
 namespace VSAMinimalApi.Features.Books.UpdateBook;
 
+/// <summary>
+///     Defines validation rules for the <see cref="UpdateBookCommand"/>.
+/// </summary>
 public class UpdateBookValidator : AbstractValidator<UpdateBookCommand>
     {
         public UpdateBookValidator()

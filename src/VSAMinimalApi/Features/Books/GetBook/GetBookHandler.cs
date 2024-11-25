@@ -6,6 +6,13 @@ using VSAMinimalApi.Database;
 
 public static class GetBookHandler
 {
+    /// <summary>
+    ///     Retrieves a book by its ID from the database or cache.
+    /// </summary>
+    /// <param name="context">The database context for accessing books.</param>
+    /// <param name="cache">The memory cache for storing book data temporarily.</param>
+    /// <param name="bookId">The ID of the book to retrieve.</param>
+    /// <returns>The book details if found; otherwise, a 404 response.</returns>
     public static  IResult Handler(MyContext context,[FromServices] IMemoryCache cache, int bookId)
     {
         var cacheKey = $"Book_{bookId}";

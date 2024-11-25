@@ -2,8 +2,14 @@ using FluentValidation;
 
 namespace VSAMinimalApi.Features.Books.CreateBook;
 
+/// <summary>
+///     Validates the input for creating a book.
+/// </summary>
 public class CreateBookValidator : AbstractValidator<CreateBookCommand>
     {
+        /// <summary>
+        ///     Defines validation rules for the <see cref="CreateBookCommand"/>.
+        /// </summary>
         public CreateBookValidator()
         {
             RuleFor(x => x.Title)

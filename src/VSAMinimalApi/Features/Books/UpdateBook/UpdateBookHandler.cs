@@ -6,6 +6,16 @@ using Microsoft.Extensions.Caching.Memory;
 using VSAMinimalApi.Database;
 public static class UpdateBookHandler
 {
+    /// <summary>
+    ///     Handles updating an existing book in the database.
+    /// </summary>
+    /// <param name="bookId">The ID of the book to update.</param>
+    /// <param name="validator">The validator for validating the update command.</param>
+    /// <param name="command">The update command containing the new book details.</param>
+    /// <param name="context">The database context for accessing books.</param>
+    /// <param name="cache">The memory cache for clearing the cache entry of the updated book.</param>
+    /// <returns>The updated book or an appropriate error response.</returns>
+
     public static IResult Handler(int bookId, [FromServices]IValidator<UpdateBookCommand> validator, UpdateBookCommand command,MyContext context,[FromServices] IMemoryCache cache)
     {
         var bookToUpdate = context.Books.FirstOrDefault(b => b.Id == bookId);
