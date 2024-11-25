@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Http.HttpResults;
+using VSAMinimalApi.Database.Models;
+
 namespace VSAMinimalApi.Features.Books.UpdateBook;
 
 using FluentValidation;
@@ -16,7 +19,7 @@ public static class UpdateBookHandler
     /// <param name="cache">The memory cache for clearing the cache entry of the updated book.</param>
     /// <returns>The updated book or an appropriate error response.</returns>
 
-    public static IResult Handler(int bookId, [FromServices]IValidator<UpdateBookCommand> validator, UpdateBookCommand command,MyContext context,[FromServices] IMemoryCache cache)
+    public static Results<NotFound,ValidationProblem,Ok<Book>> Handler(int bookId, [FromServices]IValidator<UpdateBookCommand> validator, UpdateBookCommand command,MyContext context,[FromServices] IMemoryCache cache)
     {
         var bookToUpdate = context.Books.FirstOrDefault(b => b.Id == bookId);
         if (bookToUpdate is null) return TypedResults.NotFound();

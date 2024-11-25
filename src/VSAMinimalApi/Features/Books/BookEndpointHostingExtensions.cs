@@ -5,7 +5,7 @@ using VSAMinimalApi.Features.Books.GetBooks;
 using VSAMinimalApi.Features.Books.UpdateBook;
 
 namespace VSAMinimalApi.Features.Books;
-public static class BookEndpoints
+public static class BookEndpointHostingExtensions
 { 
     public static void MapBookEndpoints(this WebApplication app)
     {

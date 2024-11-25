@@ -10,6 +10,5 @@ public static class GetBookEndpoint
     ///     of <see cref="GetBookResponse"/> with 200 status code upon success.
     /// </summary>
     internal static void MapGetBook(this IEndpointRouteBuilder app) =>
-        app.MapGet("/{bookId}", GetBookHandler.Handler)
-            .Produces<GetBookResponse>();
+        app.MapGet("/{bookId}", GetBookHandler.Handler);
 }

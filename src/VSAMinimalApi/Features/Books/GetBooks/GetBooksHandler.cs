@@ -1,5 +1,8 @@
-namespace VSAMinimalApi.Features.Books.GetBooks;
+using Microsoft.AspNetCore.Http.HttpResults;
+using VSAMinimalApi.Database.Models;
 using VSAMinimalApi.Database;
+
+namespace VSAMinimalApi.Features.Books.GetBooks;
 
 public static class GetBooksHandler
 {
@@ -10,7 +13,7 @@ public static class GetBooksHandler
     /// <param name="pageNumber">The current page number (default is 1).</param>
     /// <param name="pageSize">The number of books per page (default is 10).</param>
     /// <returns>A paginated list of books.</returns>
-    public static IResult Handler(MyContext context, int pageNumber = 1, int pageSize = 10)
+    public static Ok<List<Book>> Handler(MyContext context, int pageNumber = 1, int pageSize = 10)
     {
         var books = context.Books
             .Skip((pageNumber - 1) * pageSize) 

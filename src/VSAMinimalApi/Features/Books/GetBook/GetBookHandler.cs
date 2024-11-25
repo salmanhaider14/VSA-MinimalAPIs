@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http.HttpResults;
+
 namespace VSAMinimalApi.Features.Books.GetBook;
 
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +15,7 @@ public static class GetBookHandler
     /// <param name="cache">The memory cache for storing book data temporarily.</param>
     /// <param name="bookId">The ID of the book to retrieve.</param>
     /// <returns>The book details if found; otherwise, a 404 response.</returns>
-    public static  IResult Handler(MyContext context,[FromServices] IMemoryCache cache, int bookId)
+    public static  Results<NotFound,Ok<GetBookResponse>> Handler(MyContext context,[FromServices] IMemoryCache cache, int bookId)
     {
         var cacheKey = $"Book_{bookId}";
         if (!cache.TryGetValue(cacheKey, out GetBookResponse bookRes))

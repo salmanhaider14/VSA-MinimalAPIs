@@ -16,6 +16,5 @@ public static  class CreateBookEndpoint
     /// </summary>
 
     internal static void MapCreateBook(this IEndpointRouteBuilder app) =>
-        app.MapPost("/", CreateBookHandler.Handler)
-            .Produces<Book>(statusCode:201);
+        app.MapPost("/", CreateBookHandler.Handler);
 }

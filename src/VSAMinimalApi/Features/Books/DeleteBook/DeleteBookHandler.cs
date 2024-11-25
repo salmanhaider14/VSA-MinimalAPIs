@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using VSAMinimalApi.Database;
@@ -14,7 +15,7 @@ public static class DeleteBookHandler
     /// <returns>
     ///     A Not Found error if the book isn't found, or a 204(No Content) response on success.
     /// </returns>
-    public static IResult Handler(int bookId,MyContext context, [FromServices] IMemoryCache cache)
+    public static Results<NotFound,NoContent> Handler(int bookId,MyContext context, [FromServices] IMemoryCache cache)
     {
         var bookToDel = context.Books.FirstOrDefault(b => b.Id == bookId);
         if (bookToDel is null) return TypedResults.NotFound();

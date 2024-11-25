@@ -1,4 +1,5 @@
 using FluentValidation;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using VSAMinimalApi.Database;
 using VSAMinimalApi.Database.Models;
@@ -19,7 +20,7 @@ public static class CreateBookHandler
     /// <returns>
     ///     A validation error if the input is invalid, or a 201 response with the created book.
     /// </returns>
-    public static IResult Handler([FromServices] IValidator<CreateBookCommand> validator,CreateBookCommand command,MyContext context)
+    public static Results<ValidationProblem,Created<Book>> Handler([FromServices] IValidator<CreateBookCommand> validator,CreateBookCommand command,MyContext context)
     {
         var validationResult = validator.Validate(command);
         if (!validationResult.IsValid)

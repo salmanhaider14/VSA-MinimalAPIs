@@ -1,8 +1,6 @@
 
 namespace VSAMinimalApi.Features.Books.GetBooks;
 
-using VSAMinimalApi.Database.Models;
-
 public static class GetBooksEndpoint
 {
     /// <summary>
@@ -12,6 +10,5 @@ public static class GetBooksEndpoint
     ///     of Books List with 200 status code upon success.
     /// </summary>
     internal static void MapGetBooks(this IEndpointRouteBuilder app) =>
-        app.MapGet("/", GetBooksHandler.Handler)
-            .Produces<List<Book>>();
+        app.MapGet("/", GetBooksHandler.Handler);
 }

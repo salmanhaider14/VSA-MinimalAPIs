@@ -9,6 +9,5 @@ public static  class UpdateBookEndpoint
     ///     of 204 (No Content) status code upon success.
     /// </summary>
     internal static void MapUpdateBook(this IEndpointRouteBuilder app) =>
-        app.MapPut("/{bookId}", UpdateBookHandler.Handler)
-            .Produces(statusCode:204);
+        app.MapPut("/{bookId}", UpdateBookHandler.Handler);
 }
