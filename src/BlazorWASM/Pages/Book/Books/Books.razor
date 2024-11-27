@@ -1,0 +1,85 @@
+@page "/Books"
+@using BlazorWASM.Models
+@using BlazorWASM.Services
+@inject BookService bookService
+@inject NavigationManager Navigation
+@inject  ILogger<Books> logger
+
+<h3>SingleBooks</h3>
+
+@if (books is null)
+{
+    <p>Loading books...</p>
+}
+else if (!books.Any())
+{
+    <p>No books found.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Published Date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var book in books)
+        {
+            <tr>
+                <td>@book.Id</td>
+                <td>@book.Title</td>
+                <td>@book.AuthorName</td>
+                <td>@book.PublishedDate.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <button class="btn btn-primary btn-sm me-2" @onclick="() => NavigateToEdit(book.Id)">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </button>
+                    <button class="btn btn-danger btn-sm" @onclick="() => DeleteBook(book.Id)">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Book>? books;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadBooksAsync();
+    }
+
+    private async Task LoadBooksAsync()
+    {
+        books = await bookService.GetBooksAsync();
+    }
+
+    private void NavigateToEdit(int bookId)
+    {
+        Navigation.NavigateTo($"/Books/Edit/{bookId}");
+    }
+
+    private async Task DeleteBook(int bookId)
+    {
+       
+            var success = await bookService.DeleteBookAsync(bookId);
+            if (success)
+            {
+                books = books?.Where(b => b.Id != bookId).ToList();
+            }
+            else
+            {
+                // Handle failure (optional)
+                logger.LogInformation($"Failed to delete book with ID {bookId}");
+            }
+        }
+    }
+

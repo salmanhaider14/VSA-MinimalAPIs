@@ -1,0 +1,106 @@
+@page "/Books/Edit/{bookId}"
+@using BlazorWASM.Models
+@using BlazorWASM.Services
+@inject BookService bookService
+@inject NavigationManager Navigation
+
+<h3>Edit Book</h3>
+
+@if (isLoading)
+{
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+}
+else if (bookToUpdate is null)
+{
+    <div class="alert alert-danger" role="alert">
+        Book not found!
+    </div>
+}
+else
+{
+    <EditForm Model="bookToUpdate" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <InputText id="title" class="form-control" @bind-Value="bookToUpdate.Title" />
+            <ValidationMessage For="@(() => bookToUpdate.Title)" />
+        </div>
+
+        <div class="mb-3">
+            <label for="author" class="form-label">Author</label>
+            <InputText id="author" class="form-control" @bind-Value="bookToUpdate.AuthorName" />
+            <ValidationMessage For="@(() => bookToUpdate.AuthorName)" />
+        </div>
+
+        <div class="mb-3">
+            <label for="publishedDate" class="form-label">Published Date</label>
+            <InputDate @bind-Value="bookToUpdate.PublishedDate" class="form-control" />
+            <ValidationMessage For="@(() => bookToUpdate.PublishedDate)" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Save Changes
+        </button>
+        <button type="button" class="btn btn-secondary ms-2" @onclick="Cancel">
+            <i class="bi bi-x-circle"></i> Cancel
+        </button>
+    </EditForm>
+}
+
+@code {
+    [Parameter] public string bookId { get; set; }
+
+    private UpdateBookCommand bookToUpdate;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var book = await bookService.GetBookByIdAsync(int.Parse(bookId));
+            if (book != null)
+            {
+                bookToUpdate = new UpdateBookCommand
+                {
+                    Title = book.Title,
+                    AuthorName = book.AuthorName,
+                    PublishedDate = book.PublishedDate
+                };
+            }
+        }
+        catch
+        {
+            bookToUpdate = null; // Handle errors (e.g., book not found)
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (bookToUpdate is not null)
+        {
+            var success = await bookService.UpdateBookAsync(int.Parse(bookId), bookToUpdate);
+
+            if (success)
+            {
+                Navigation.NavigateTo($"/book/{bookId}");
+            }
+            else
+            {
+                // Handle error (e.g., show notification)
+            }
+        }
+    }
+
+    private void Cancel()
+    {
+        Navigation.NavigateTo("/Books");
+    }
+}

@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSAMinimalApi", "src\VSAMinimalApi\VSAMinimalApi.csproj", "{0B30CC55-0212-486D-BD11-9F071CB6F701}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWASM", "src\BlazorWASM\BlazorWASM.csproj", "{E70808B6-21DE-4FC5-8AD5-02BD8F348523}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{0B30CC55-0212-486D-BD11-9F071CB6F701}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B30CC55-0212-486D-BD11-9F071CB6F701}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B30CC55-0212-486D-BD11-9F071CB6F701}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E70808B6-21DE-4FC5-8AD5-02BD8F348523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E70808B6-21DE-4FC5-8AD5-02BD8F348523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E70808B6-21DE-4FC5-8AD5-02BD8F348523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E70808B6-21DE-4FC5-8AD5-02BD8F348523}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

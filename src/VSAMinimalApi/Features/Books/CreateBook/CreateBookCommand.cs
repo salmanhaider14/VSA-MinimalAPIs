@@ -1,7 +1,7 @@
 namespace VSAMinimalApi.Features.Books.CreateBook;
 
 /// <summary>
-///     Represents a command to create a Book.
+///     Represents a command to create a SingleBook.
 /// </summary>
 /// <param name="Title">Title of the book.</param>
 /// <param name="PublishedDate">The date when the book was published.</param>

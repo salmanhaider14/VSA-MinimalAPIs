@@ -1,0 +1,52 @@
+@page "/CreateBook"
+@using BlazorWASM.Models
+@using BlazorWASM.Services
+@inject BookService bookService
+@inject NavigationManager Navigation
+
+<h3>Create Book</h3>
+
+<EditForm Model="newBook" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <InputText id="title" class="form-control"  @bind-Value="newBook.Title"  />
+        <ValidationMessage For="@(() => newBook.Title)" />
+    </div>
+
+    <div class="mb-3">
+        <label for="author" class="form-label">Author</label>
+        <InputText id="author" class="form-control" @bind-Value="newBook.AuthorName" />
+        <ValidationMessage For="@(() => newBook.AuthorName)" />
+    </div>
+
+    <div class="mb-3">
+        <label for="publishedDate" class="form-label">Published Date</label>
+        <InputDate @bind-Value="newBook.PublishedDate" class="form-control" />
+        <ValidationMessage For="@(() => newBook.PublishedDate)" />
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        <i class="bi bi-check-circle"></i> Create Book
+    </button>
+</EditForm>
+
+@code {
+    private CreateBookCommand newBook  = new ();
+
+    private async Task HandleValidSubmit()
+    {
+        var createdBook = await bookService.CreateBookAsync(newBook);
+
+        if (createdBook != null)
+        {
+            Navigation.NavigateTo($"/book/{createdBook.Id}");
+        }
+        else
+        {
+            // Handle errors, e.g., show a notification (not included here for simplicity)
+        }
+    }
+}

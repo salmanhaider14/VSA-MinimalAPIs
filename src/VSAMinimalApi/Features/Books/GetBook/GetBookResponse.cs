@@ -1,7 +1,7 @@
 namespace VSAMinimalApi.Features.Books.GetBook;
 
 /// <summary>
-///     Represents a response to retrieve a Book.
+///     Represents a response to retrieve a SingleBook.
 /// </summary>
 /// <param name="Id">Id of the book.</param>
 /// <param name="Title">Title of the book.</param>

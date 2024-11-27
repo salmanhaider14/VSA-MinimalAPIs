@@ -1,0 +1,55 @@
+@page "/book/{bookId:int}"
+@using BlazorWASM.Services
+@inject BookService bookService
+@inject NavigationManager Navigation
+@using Book = BlazorWASM.Models.Book
+
+<h3>SingleBook Details</h3>
+
+@if (book == null)
+{
+    <p>Loading book details...</p>
+}
+else
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">@book.Title</h5>
+            <h6 class="card-subtitle text-muted">Author: @book.AuthorName</h6>
+            <p class="card-text">
+                <strong>Published Date:</strong> @book.PublishedDate.ToString("yyyy-MM-dd")
+            </p>
+        </div>
+        <div class="card-footer text-end">
+            <button class="btn btn-primary" @onclick="NavigateToBooks">
+                <i class="bi bi-arrow-left"></i> Back to All Books
+            </button>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public int bookId { get; set; }
+    
+    private Models.Book? book;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadBookAsync();
+    }
+
+    private async Task LoadBookAsync()
+    {
+        book = await bookService.GetBookByIdAsync(bookId);
+        if (book == null)
+        {
+            // Handle case when book is not found
+            Navigation.NavigateTo("/Books");
+        }
+    }
+
+    private void NavigateToBooks()
+    {
+        Navigation.NavigateTo("/Books");
+    }
+}
