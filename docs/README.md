@@ -33,9 +33,6 @@ This project demonstrates a **Minimal API** implementation following the **Verti
 
 This solution also includes a **Blazor WebAssembly demonstration project** in the `src/BlazorWASM` folder. The project showcases a simple CRUD application for managing books with features like listing, creating, editing, and deleting books. It serves as an example of how to use a client-side Blazor application with the Minimal API.
 
-You can explore it here:  
-[`src/BlazorWASM`](src/BlazorWASM)
-
 The project includes:
 - Razor components for CRUD operations.
 - Integration with the Minimal API using an `HttpClient`.
